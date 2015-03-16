@@ -1,0 +1,27 @@
+{
+  "name": "hubot-bamboo-pr",
+  "version": "1.0.0",
+  "description": "handle pull request and trigger bamboo with custom variables",
+  "main": "index.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jcouyang/hubot-bamboo-pr.git"
+  },
+  "keywords": [
+    "bamboo",
+    "github",
+    "PR",
+    "pull",
+    "request",
+    "hubot"
+  ],
+  "author": "Jichao Ouyang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jcouyang/hubot-bamboo-pr/issues"
+  },
+  "homepage": "https://github.com/jcouyang/hubot-bamboo-pr"
+}
