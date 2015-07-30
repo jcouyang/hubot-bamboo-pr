@@ -14,6 +14,7 @@ module.exports = (robot) ->
     bamboo_url = query.bamboo
     build_key = query.buildKey
     room = query.room
+    auto_trigger = query.auto
     res.end "" if !bamboo_url
     data = req.body
     eventType = req.headers["x-github-event"]
@@ -23,8 +24,8 @@ module.exports = (robot) ->
       if eventType in eventTypes
         if room
           robot.messageRoom room,"poke me to trigger build for pull request #{data.number} of #{data.pull_request.head.repo.name} #{bamboo_url}/ajax/runParametrisedManualBuild.action?planKey=#{build_key}&buildNumber=&customRevision=&key_pull_num=pull_num&variable_pull_num=#{data.number}&key_pull_sha=pull_sha&variable_pull_sha=#{data.pull_request.head.sha}&bamboo.successReturnMode=json&decorator=nothing&confirm=true"
-        robot.http("#{bamboo_url}?bamboo.variable.pull_ref=#{data.pull_request.head.ref}&bamboo.variable.pull_sha=#{data.pull_request.head.sha}&bamboo.variable.pull_num=#{data.number}")
-          .post()
+        if auto_trigger
+          robot.http("#{bamboo_url}?bamboo.variable.pull_ref=#{data.pull_request.head.ref}&bamboo.variable.pull_sha=#{data.pull_request.head.sha}&bamboo.variable.pull_num=#{data.number}").post()
       else
         console.log "Ignoring #{eventType} event as it's not allowed."
     catch error
